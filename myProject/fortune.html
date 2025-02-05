@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <title>Fortune</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        .img_container {
+            text-align: center;
+            margin: 100px 0px;
+        }
+        img {
+            width: 250px;
+            height: auto;
+            cursor: pointer;
+        }
+        img:hover {
+            filter: drop-shadow(0 0 0 #000) drop-shadow(3px 3px 10px darkgrey);
+        }
+        /* define animation */
+        @keyframes shake {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            20%, 60% { transform: translate(-10px, 0) rotate(-10deg); }
+            40%, 80% { transform: translate(10px, 0) rotate(10deg); }
+        }
+        .shake {
+            animation: shake 0.4s ease;
+        }
+        .fortune {
+            display: block;
+            font-size: 50px;
+            font-style: italic;
+            font-weight: 500;
+            margin: 100px 150px 50px 150px;
+        }
+    </style>
+
+    <script>
+        const fortunes = ["Today brings new opportunities—embrace them with an open heart.",
+        "Small changes can lead to great happiness; cherish even the little things.",
+        "Your hard work will bear fruit; keep pushing forward without giving up.",
+        "An unexpected meeting will have a positive impact on your life; value new connections.",
+        "The choices you make today will lead to tomorrow’s success; choose with confidence.",
+        "Take a moment to set aside stress and find peace within yourself; your mental health matters.",
+        "In tough times, a positive mindset will be your greatest protector; don’t lose hope.",
+        "Finding joy in the little things at the end of the day will invite greater happiness.",
+        "The decisions you make now will shape your future; think carefully and act wisely.",
+        "Travel opens doors to new experiences and opportunities; imagine the places you want to go."];
+
+        function showFortune() {
+            let n = Math.floor(Math.random() * 10);
+
+            const container = document.querySelector(".img_container");
+
+            const span = document.createElement("span");
+            span.textContent = fortunes[n];
+            span.className = "fortune";
+            
+            container.appendChild(span);
+
+            const img = document.createElement("img");
+            img.src = "images/good_dino.gif"
+            img.style = "width: 500px; height: auto;"
+
+            container.appendChild(img)
+        }
+    </script>
+</head>
+<body>
+    <nav>
+        <h1>Sandwich Is Better</h1>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-dark custom-padding" href="./main.html">Main</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark custom-padding" href="./history.html">History</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark custom-padding" href="./order.html">Order</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark custom-padding" href="./place.html">Place</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark custom-padding" href="./contact.html">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark custom-padding" href="./fortune.html">Fortune</a>
+            </li>
+        </ul>
+    </nav>
+    <hr class="custom-hr">
+
+    <div class="img_container">
+        <img src="images/sandwich2.png" alt="sandwich" id="sandwich">
+    </div>
+
+    <script>
+        const clickAudio = new Audio("sounds/click_cut.mp3")
+        const celebrateAudio = new Audio("sounds/yaaas.mp3")
+
+        const img = document.getElementById("sandwich");
+
+        img.addEventListener("click", function() {
+            clickAudio.play();
+
+            const w = img.clientWidth;
+            img.style.width = (w + 30) + "px";
+
+            img.classList.add("shake");
+
+            setTimeout(function() {
+                img.classList.remove("shake");
+            }, 500);
+
+            if (w >= 1100) {
+                img.style.display = "none";
+                showFortune();
+                celebrateAudio.loop = true;
+                celebrateAudio.play();
+            }
+        });
+    </script>
+</body>
+</html>
